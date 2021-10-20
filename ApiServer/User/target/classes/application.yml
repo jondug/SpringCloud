@@ -1,0 +1,41 @@
+server:
+  port: 9003
+spring:
+  datasource:
+    #数据库链接url
+    url: jdbc:mysql://127.0.0.1:3306/very_good_store?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    #数据库账号密码
+    username: root
+    password: 123456
+    #数据库驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    devtools:
+      restart:
+        poll-interval: 2s
+        quiet-period: 1999ms
+    servlet:
+      #传输文件大小
+      multipart:
+        max-file-size: 2000MB
+        max-request-size: 2000MB
+
+    mvc:
+      static-path-pattern: /**
+    resources:
+      static-locations: file:D:\file\veryGood\
+  mybatis:
+    #mapper文件
+    mapper-locations: classpath:mapper/*.xml
+    configuration:
+      map-underscore-to-camel-case: true
+  application:
+    name: user-server
+feign:
+  sentinel:
+    enabled: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9000/eureka
+  instance:
+    prefer-ip-address: true
